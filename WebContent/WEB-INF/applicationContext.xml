@@ -18,21 +18,22 @@
 				hibernate.dialect=org.hibernate.dialect.Oracle10gDialect
 				hibernate.hbm2ddl.auto=update
 				hibernate.show_sql=true
+				<!-- hibernate.current_session_context_class = jta -->
 			</value>
 		</property>
 		
 		<property name="annotatedClasses">
 			<list>
-		        <value>lti.zombie.entity.JobBean</value>
-		        <value>lti.zombie.entity.UserBean</value>
-		        <value>lti.zombie.entity.Requirement</value>
+		        <value>lti.zombie.bean.JobBean</value>
+		        <value>lti.zombie.bean.UserBean</value>
+		        <value>lti.zombie.bean.RequirementBean</value>
 		        
 		   	</list>
 		   	
 		</property>		
 	</bean>
 	
-		<bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager" >
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 

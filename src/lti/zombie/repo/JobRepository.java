@@ -12,7 +12,7 @@ import lti.zombie.bean.RequirementBean;
 
 public interface JobRepository {
 	
-String Validate(LoginBean login);
+	UserBean Validate(LoginBean login);
 	
 	boolean save(UserBean user);
 	

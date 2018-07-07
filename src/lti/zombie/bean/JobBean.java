@@ -23,26 +23,27 @@ public class JobBean {
 	
 	@ManyToOne
 	@JoinColumn(name="email")
-	private Set<UserBean> user;
+	private UserBean user;
 	
 	@ManyToOne
 	@JoinColumn(name="reqId")
-	private Set<RequirementBean> requirement;
+	private RequirementBean requirement;
 	
 	
 
 	
 	
-	public Set<UserBean> getUser() {
+	
+	public UserBean getUser() {
 		return user;
 	}
-	public void setUser(Set<UserBean> user) {
+	public void setUser(UserBean user) {
 		this.user = user;
 	}
-	public Set<RequirementBean> getRequirement() {
+	public RequirementBean getRequirement() {
 		return requirement;
 	}
-	public void setRequirement(Set<RequirementBean> requirement) {
+	public void setRequirement(RequirementBean requirement) {
 		this.requirement = requirement;
 	}
 	public int getJobId() {

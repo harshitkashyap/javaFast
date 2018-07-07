@@ -10,7 +10,7 @@ import lti.zombie.bean.RequirementBean;
 public interface JobService {
 	
 	
-	String authenticate(LoginBean login);
+	UserBean authenticate(LoginBean login);
 	
 	boolean persist(UserBean user);
 	

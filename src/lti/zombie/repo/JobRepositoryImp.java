@@ -5,8 +5,10 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import lti.zombie.bean.JobBean;
 import lti.zombie.bean.LoginBean;
@@ -15,21 +17,23 @@ import lti.zombie.bean.UserBean;
 import lti.zombie.bean.RequirementBean;
 
 @Repository
+@Transactional
 public class JobRepositoryImp implements JobRepository {
 
 	@Autowired
-	private SessionFactory factory;
+	private SessionFactory sessionFactory;
 	
 	@Override
-	public String Validate(LoginBean login) {
+//	@Transactional
+	public UserBean Validate(LoginBean login) {
 		
-		Session session=factory.getCurrentSession();
-		
+		Session session=sessionFactory.getCurrentSession();
+		//Transaction txn=session.beginTransaction();
 		UserBean user=(UserBean)session.get(UserBean.class,login.getEmail());
-		
+		//txn.commit();
 		
 		if(user!=null)
-			return user.getEmail();
+			return user;
 		else
 			return null;
 		
@@ -38,9 +42,15 @@ public class JobRepositoryImp implements JobRepository {
 
 	@Override
 	public boolean save(UserBean user) {
-		Session session=factory.getCurrentSession();
+		Session session=sessionFactory.getCurrentSession();
+		
 		try {
+			if(session!=null)
+			System.out.println("session not null");
+			
+			//Transaction txn=session.beginTransaction();
 			session.save(user);
+			//txn.commit();
 			return true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -57,7 +67,7 @@ public class JobRepositoryImp implements JobRepository {
 		
 		String hql="from RequirementBean where skill=? and type=? and location=? and salary=?";
 		
-		Session session=factory.getCurrentSession();
+		Session session=sessionFactory.getCurrentSession();
 		UserBean userBean=(UserBean)session.get(UserBean.class,email);
 		
 		Query query=session.createQuery(hql);
@@ -75,7 +85,7 @@ public class JobRepositoryImp implements JobRepository {
 		
 		String hql="from RequirementBean where skill=:skl";
 		
-		Session session=factory.getCurrentSession();
+		Session session=sessionFactory.getCurrentSession();
 		
 		Query query=session.createQuery(hql);
 		query.setParameter("skl", skill);

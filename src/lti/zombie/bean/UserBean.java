@@ -2,6 +2,7 @@ package lti.zombie.bean;
 
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -13,17 +14,28 @@ public class UserBean {
 	
 	
 	@Id
+	@Column(name="email")
 	private String email;
+	@Column(name="password")
 	private String password;
+	@Column(name="name")
 	private String name;
+	@Column(name="gender")
 	private String gender;
+	@Column(name="city")
 	private String city;
+	@Column(name="age")
 	private int age;
+	@Column(name="phone")
 	private Long phone;
+	@Column(name="location")
 	private String location;
+	@Column(name="skill")
 	private String skill;
+	@Column(name="type")
 	private String type;
-	private double expSal;
+	@Column(name="expSal")
+	private int expSal;
 	
 	@OneToMany(mappedBy="user")
 	private Set<JobBean> jobs;
@@ -52,10 +64,10 @@ public class UserBean {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public double getExpSal() {
+	public int getExpSal() {
 		return expSal;
 	}
-	public void setExpSal(double expSal) {
+	public void setExpSal(int expSal) {
 		this.expSal = expSal;
 	}
 	

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import lti.zombie.bean.JobBean;
 import lti.zombie.bean.LoginBean;
@@ -20,14 +22,16 @@ public class JobServiceImp implements JobService {
 	private JobRepositoryImp repo;
 
 	@Override
-	public String authenticate(LoginBean login) {
+//	@Transactional
+	public UserBean authenticate(LoginBean login) {
 
-		String name=repo.Validate(login);
+		UserBean name=repo.Validate(login);
 		// TODO Auto-generated method stub
 		return name;
 	}
 
 	@Override
+//	@Transactional(propagation=Propagation.REQUIRED)
 	public boolean persist(UserBean user) {
 		
 		boolean save=repo.save(user);
